@@ -1,0 +1,11 @@
+.logotype {
+    width: 35px;
+    height: 35px;
+    font-size: 26px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.logotype svg:hover {
+    background-color: rgb(231, 230, 230);
+}
