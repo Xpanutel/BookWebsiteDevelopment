@@ -1,0 +1,144 @@
+.card-inner__aside,
+.card-inner__header,
+.card-inner__header-top {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-inner {
+    padding-top: 100px;
+}
+
+.card-inner__wrapper {
+    display: grid;
+    grid-template-columns: 1fr / 1fr minmax(auto, 200px) minmax(auto, 1000px) 1fr;
+}
+
+.card-inner__aside {
+    gap: 10px;
+    grid-column: 1 / 2;
+}
+
+.card-inner__aside-preview {
+    width: 240px;
+    height: 360px;
+}
+
+.card-inner__aside-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.action__blue-button-big,
+.action__report-button {
+    width: 208px;
+    height: 8px;
+}
+
+
+.action__blue-button-big,
+.action__report-button {
+    height: auto;
+    border-radius: 10px;
+    padding: 10px 20px;
+    width: 240px;
+    text-transform: uppercase;
+}
+.action__blue-button-big {
+    color: #fff;
+    background-color: rgb(86, 86, 255);
+    font-weight: bold;
+}
+
+.action__report-button {
+    background: none;
+    color: rgb(86, 86, 255);
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+.action__report-button svg {
+    width: 17px;
+    fill: rgb(86, 86, 255);
+}
+
+.card-inner__header {
+    grid-column: 2 / 3;
+    gap: 20px;
+}
+
+.card-inner__header-top {
+    gap: 10px;
+}
+
+.card-inner__header-top-p {
+    font-size: 1rem;
+}
+
+.card-inner__header-top-h1 {
+    font-size: 2rem;
+}
+
+.card-inner__header-bottom {
+    display: flex;
+    // gap: 50px;
+    justify-content: space-between;
+}
+
+table tbody {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+table tbody td {
+    padding-right: 30px;
+}
+
+.card-inner__header-bottom-right,
+.card-inner__header-bottom-right-flex {
+    display: flex;
+}
+
+.card-inner__header-bottom-right {
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-and-text {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.icon-and-text svg {
+    width: 25px;
+    fill: rgb(255, 187, 0);
+}
+
+.icon-and-text-black svg {
+    width: 15px;
+    height: 13px;
+}
+
+.icon-and-text-black span {
+    padding-left: 5px;
+}
+
+.card-inner__header-bottom-right-flex {
+    text-align: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.action__blure-btn {
+    background-color: rgba(229, 231, 235);
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+.card-inner__content {
+}

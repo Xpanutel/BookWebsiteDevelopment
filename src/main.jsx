@@ -9,6 +9,8 @@ import CardInner from './components/CardInner/CardInner.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Header />
-    <CardInner />
+    <main>
+      {/* <CardInner /> */}
+    </main>
   </StrictMode>,
 )
