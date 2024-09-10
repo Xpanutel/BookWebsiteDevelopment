@@ -1,0 +1,27 @@
+
+.left{
+  padding-left: 20px;
+  .routs{
+    display: flex;
+    justify-content: space-between;
+  }
+  .similiar{
+    display: flex;
+    padding-top: 10px;
+    gap: 10px;
+
+    ul{
+      padding:5px 0  5px 0 ;
+      display: grid;
+      align-items: center;
+      font-size: 15px;
+      li{
+        display: flex;
+
+      }
+      li:last-child{
+        gap: 10px;
+      }
+    }
+  }
+}

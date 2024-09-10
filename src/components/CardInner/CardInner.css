@@ -1,0 +1,176 @@
+.container_fine {
+  position: relative;
+}
+
+.card-inner__aside,
+.card-inner__header-top {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-inner {
+  padding-top: 100px;
+  position: relative;
+  background-size: cover;
+}
+
+.card-inner:before {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.stiky {
+  height: 100%;
+}
+
+.card-inner__wrapper {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px;
+}
+
+.card-inner__aside {
+  gap: 10px;
+  grid-column: 1/2;
+  position: sticky;
+  top: 20px;
+}
+
+.card-inner__aside-preview {
+  width: 240px;
+  height: 360px;
+}
+
+.card-inner__aside-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.action__blue-button-big,
+.action__report-button {
+  width: 208px;
+  height: 8px;
+}
+
+.action__blue-button-big,
+.action__report-button {
+  height: auto;
+  border-radius: 10px;
+  padding: 10px 20px;
+  width: 240px;
+  text-transform: uppercase;
+}
+
+.action__blue-button-big {
+  color: #fff;
+  background-color: rgb(86, 86, 255);
+  font-weight: bold;
+}
+
+.action__report-button {
+  background: none;
+  color: rgb(86, 86, 255);
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.action__report-button svg {
+  width: 17px;
+  fill: rgb(86, 86, 255);
+}
+
+.card-inner__header {
+  display: grid;
+  grid-template-rows: 150px 1fr;
+}
+
+.card-inner__header-top {
+  gap: 10px;
+}
+
+.card-inner__header-top-p {
+  font-size: 1rem;
+}
+
+.card-inner__header-top-h1 {
+  font-size: 2rem;
+}
+
+.card-inner__header-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+table tbody {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+table tbody td {
+  padding-right: 30px;
+}
+
+.card-inner__header-bottom-right,
+.card-inner__header-bottom-right-flex {
+  display: flex;
+}
+
+.card-inner__header-bottom-right {
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-and-text {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.icon-and-text svg {
+  width: 25px;
+  fill: rgb(255, 187, 0);
+}
+
+.icon-and-text-black svg {
+  width: 15px;
+  height: 13px;
+}
+
+.icon-and-text-black span {
+  padding-left: 5px;
+}
+
+.card-inner__header-bottom-right-flex {
+  text-align: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.action__blure-btn {
+  background-color: rgb(229, 231, 235);
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+
+.card-category {
+  display: grid;
+  grid-template-columns: 670px 1fr;
+}
+.card-category .card-category_descr {
+  display: flex;
+}
+.card-category .card-category_descr li {
+  padding: 10px 20px;
+  margin-bottom: 30px;
+}
+.card-category .card-category_descr li:hover {
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=CardInner.css.map */

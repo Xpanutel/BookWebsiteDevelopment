@@ -1,0 +1,64 @@
+.description {
+  font-size: 17px;
+  color: #656565;
+  display: grid;
+  gap: 20px;
+
+  span {
+    line-height: 25px;
+  }
+
+  .categories {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 650px;
+    padding-top: 40px;
+
+    .categoty {
+      border: 1px solid #f3f3f3;
+      border-radius: 15px;
+      background-color: #f3f3f3;
+      padding: 5px 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      margin: 2px;
+
+    }
+
+    .categoty:hover {
+      color: #7571f3;
+
+    }
+  }
+  .autor{
+    display:grid;
+    gap: 20px;
+
+    span{
+      color: #000000;
+    }
+    .autors{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px;
+    }
+  }
+
+  .ststus{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    ul{
+      font-size: 15px;
+      line-height:15px;
+      li:last-child{
+        font-size: 12px;
+      }
+
+    }
+
+  }
+
+}

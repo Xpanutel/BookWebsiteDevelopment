@@ -1,0 +1,26 @@
+.left {
+  padding-left: 20px;
+}
+.left .routs {
+  display: flex;
+  justify-content: space-between;
+}
+.left .similiar {
+  display: flex;
+  padding-top: 10px;
+  gap: 10px;
+}
+.left .similiar ul {
+  padding: 5px 0 5px 0;
+  display: grid;
+  align-items: center;
+  font-size: 15px;
+}
+.left .similiar ul li {
+  display: flex;
+}
+.left .similiar ul li:last-child {
+  gap: 10px;
+}
+
+/*# sourceMappingURL=Similar.module.css.map */

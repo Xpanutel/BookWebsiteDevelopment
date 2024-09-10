@@ -1,15 +1,12 @@
-.header {
 
-}
-
-.header,
-.header__left,
 .header__right {
-    position: relative;
-    width: 100%;
+
 }
 
-.header__wrapper,
+.header__wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
 .header__left,
 .header__right,
 .nav__list,
@@ -18,7 +15,7 @@
 }
 
 .header__wrapper,
-.header__left, 
+.header__left,
 .header__right {
     align-items: center;
 }
@@ -28,13 +25,8 @@
     margin: 5px;
     height: 50px;
     justify-content: space-between;
-    position: fixed;
-    z-index: 1000;
-    width: 100%;
-    max-width: 100vw;
-    top: 0;
     // display: block;
-} 
+}
 
 
 // Left
@@ -80,7 +72,8 @@
 
 .header__right {
     gap: 14px;
-} 
+
+}
 
 .header__themes {
     background-color: #fff;
