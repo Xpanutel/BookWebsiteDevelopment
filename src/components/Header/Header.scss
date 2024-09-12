@@ -123,6 +123,12 @@
 .header__settings {
     width: 24px;
     height: 24px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.header__settings svg:hover {
+    fill: blue;
 }
 
 .header__blue-button {
