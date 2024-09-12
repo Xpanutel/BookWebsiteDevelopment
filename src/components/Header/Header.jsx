@@ -26,10 +26,9 @@ function Header() {
           <section className="header__right">
             <a className="header__marks" href="#">Закладки</a>
             <div className="header__themes themes">
-              <div className="themes__indicator">
-                <div className="themes__icon-container">
+              <div className="themes__indicator"></div>
+              <div className="themes__icon-container">
                   <i className="themes__icon fa-solid fa-sun"></i>
-                </div>
               </div>
             </div>
             <div className='header__settings'>

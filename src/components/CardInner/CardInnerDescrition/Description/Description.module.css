@@ -1,0 +1,54 @@
+.description {
+  font-size: 17px;
+  color: #656565;
+  display: grid;
+  gap: 20px;
+}
+.description span {
+  line-height: 25px;
+}
+.description .categories {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 650px;
+  padding-top: 40px;
+}
+.description .categories .categoty {
+  border: 1px solid #f3f3f3;
+  border-radius: 15px;
+  background-color: #f3f3f3;
+  padding: 5px 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  margin: 2px;
+}
+.description .categories .categoty:hover {
+  color: #7571f3;
+}
+.description .autor {
+  display: grid;
+  gap: 20px;
+}
+.description .autor span {
+  color: #000000;
+}
+.description .autor .autors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+}
+.description .ststus {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.description .ststus ul {
+  font-size: 15px;
+  line-height: 15px;
+}
+.description .ststus ul li:last-child {
+  font-size: 12px;
+}
+
+/*# sourceMappingURL=Description.module.css.map */

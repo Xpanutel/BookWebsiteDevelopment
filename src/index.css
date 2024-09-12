@@ -56,13 +56,13 @@ body {
   color: #000;
   font-size: 16px;
   font-weight: 400;
-
+	height: 100%;
   min-height: 100%;
 }
 
 /* Tech.classes */
 ._container {
-    max-width: 1200px;
+    max-width: 1250px;
     margin: 0 auto;
     padding: 0 15px;
 }
