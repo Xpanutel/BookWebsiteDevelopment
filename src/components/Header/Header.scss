@@ -1,12 +1,15 @@
-
-.header__right {
-
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    background-color: #fff;
 }
 
 .header__wrapper{
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+.header__wrapper,
 .header__left,
 .header__right,
 .nav__list,
@@ -76,9 +79,9 @@
 }
 
 .header__themes {
-    background-color: #fff;
-    width: 60px;
-    height: 35px;
+    background-color: #000000;
+    width: 55px;
+    height: 28px;
     border-radius: 20px;
     padding: 0 5px;
     box-shadow: inset 0 8px 60px rgba(0, 0, 0, .1),
@@ -93,7 +96,7 @@
 
 .themes__indicator {
     background-color: #fff;
-    width: 30px;
+    width: 25px;
     height: 25px;
     border-radius: 50%;
 
@@ -107,12 +110,13 @@
     height: 100%;
 
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    padding-right: 1px;
 }
 
 .themes__icon {
-    color: yellow;
+    color: #ff9800;
     font-size: 15px;
 }
 

@@ -8,7 +8,7 @@ function CardInner() {
     return (
         <>
             <section className='card-inner'
-                     // style={{backgroundImage:`url(${omg})`}}
+                    //  style={{backgroundImage:`url(${omg})`}}
             >
                 <section className="card-inner__wrapper _container"
                 >
