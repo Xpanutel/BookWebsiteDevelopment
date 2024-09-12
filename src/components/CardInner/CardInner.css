@@ -11,7 +11,7 @@
 .card-inner {
   padding-top: 100px;
   position: relative;
-  background-color: #fff;
+  background-size: cover;
 }
 
 .card-inner:before {

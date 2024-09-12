@@ -1,16 +1,14 @@
 .header {
     position: sticky;
     top: 0;
-    background: #fff;
     z-index: 99;
+    background-color: #fff;
 }
 
 .header__wrapper{
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-
-
 .header__wrapper,
 .header__left,
 .header__right,
@@ -30,6 +28,7 @@
     margin: 5px;
     height: 50px;
     justify-content: space-between;
+    // display: block;
 }
 
 
@@ -82,7 +81,7 @@
 .header__themes {
     background-color: #000000;
     width: 55px;
-    height: 29px;
+    height: 28px;
     border-radius: 20px;
     padding: 0 5px;
     box-shadow: inset 0 8px 60px rgba(0, 0, 0, .1),
@@ -97,8 +96,8 @@
 
 .themes__indicator {
     background-color: #fff;
-    width: 21px;
-    height: 21px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
 
     position: absolute;
@@ -113,23 +112,17 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding-right: 2px;
+    padding-right: 1px;
 }
 
 .themes__icon {
-    color: rgb(255, 170, 0);
+    color: #ff9800;
     font-size: 15px;
 }
 
 .header__settings {
     width: 24px;
     height: 24px;
-    transition: .3s;
-    cursor: pointer;
-}
-
-.header__settings svg:hover {
-    fill: blue;
 }
 
 .header__blue-button {
