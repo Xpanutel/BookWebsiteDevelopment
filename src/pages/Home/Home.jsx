@@ -1,11 +1,10 @@
 import classes from './Home.module.scss'
-import CardInner from "../../components/CardInner/CardInner.jsx";
-
+import {Link} from "react-router-dom";
 const Home = () => {
     return (
         <div>
             <div className={classes.home}>
-                {/* <CardInner/> */}
+                <Link to={'card'}>Home</Link>
             </div>
         </div>
     );

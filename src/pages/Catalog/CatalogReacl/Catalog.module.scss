@@ -1,0 +1,27 @@
+.container{
+  background-color: #f5f5f5;
+
+  .container_inner{
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    h1{
+      padding: 40px 0;
+      font-size: 35px;
+      font-weight: 500;
+    }
+
+    section{
+      display: grid;
+      grid-template-columns:3.5fr 1fr;
+      gap: 30px;
+
+      .popup{
+        gap: 10px;
+        display:flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
