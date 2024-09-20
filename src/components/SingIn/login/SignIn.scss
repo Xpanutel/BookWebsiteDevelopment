@@ -1,0 +1,208 @@
+.sign-in {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign-in__wrapper {
+    width: 440px;
+    height: 592px;
+    padding: 50px 20px;
+    background-color: #fff;
+    border-radius: 15px;
+    position: relative;
+    display: none;
+}
+
+.sign-in__wrapper-top,
+.sign-in__wrapper-bottom {
+    width: 250px;
+}
+
+.sign-in__wrapper-top {
+    position: absolute;
+    top: 15%;
+    left: 10%;
+}
+
+.sign-in__wrapper-bottom {
+    position: absolute;
+    bottom: 50px;
+    left: 22%;
+    text-align: center;
+}
+
+.sign-in__wrapper-bottom-text {
+    color: grey;
+    font-size: 17px;
+}
+
+.press-continue {
+    padding: 10px 0;
+}
+
+.press-continue,
+.none-account {
+    font-size: 12px;
+    text-align: center;
+}
+
+.none-account {
+    padding: 5px 0;
+}
+
+.text-blue-decoration {
+    color: rgb(85, 85, 243);
+}
+
+.sign-in__registration-btn {
+    background: none;
+    color: rgb(94, 94, 245);
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.sign-in__auth-btn {
+    margin: 10px 0;
+    width: 330px;
+    height: 43px;
+    background-color: rgb(234, 234, 234);
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 12px;
+    transition: .3s;
+}
+
+.sign-in__auth-btn:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+.sign-in__auth-logo,
+.sign-in__auth-logo-ya,
+.sign-in__auth-logo-google,
+.sign-in__auth-logo-telegram {
+    width: 70px;
+    height: 43px;
+}
+
+.sign-in__auth-logo {
+    background-color: rgb(216, 216, 216);
+}
+
+
+.sign-in__auth-logo-ya,
+.sign-in__auth-logo-google {
+    fill: white;
+}
+
+.sign-in__auth-logo-ya {
+    background-color: #ffd53e;
+}
+
+.sign-in__auth-logo-google {
+    background-color: #cc342b;
+}
+
+.sign-in__auth-logo-telegram {
+    background-color: #0088cc;
+}
+
+.sign-in__auth-logo svg,
+.sign-in__auth-logo-ya svg,
+.sign-in__auth-logo-google svg,
+.sign-in__auth-logo-telegram svg  {
+    height: 100%;
+}
+
+.sign-in__auth-logo svg {
+    width: 25px;
+}
+
+.sign-in__auth-logo-ya svg {
+    width: 15px;
+}
+
+.sign-in__auth-logo-google svg {
+    width: 30px;
+}
+
+.sign-in__auth-logo-telegram svg {
+    width: 25px;
+    color: white;
+}
+
+.sign-in__auth-name {
+    padding-left: 20px;
+}
+
+
+// Modal'qa
+
+.sign-in__wrapper-modal {
+    width: 440px;
+    height: 400px;
+    padding: 50px 20px;
+    background-color: #fff;
+    border-radius: 15px;
+    position: relative;
+}
+
+
+.action-none-bg-btn__backtoback {
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    transition: .3s;
+}
+
+.action-none-bg-btn__backtoback:hover {
+    color: rgb(172, 171, 171);;
+}
+
+.action-none-bg-btn__backtoback svg {
+    width: 20px;
+    height: 20px;
+}
+
+.wrapper-modal__form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: absolute;
+    top: 25%;
+    left: 15%;
+}
+
+.wrapper-modal__form input {
+    border: 1px rgb(208, 206, 206) solid;
+    border-radius: 20px;
+    padding: 5px 10px;
+    width: 300px;
+    height: 40px;
+}
+
+.action-none-bg-reset-pass {
+    position: absolute;
+    background: none;
+    color: rgb(46, 46, 247);
+    right: 0;
+    bottom: 45%;
+}
+
+.action-blue-btn__login {
+    margin-top: 25px;
+    background-color: rgb(60, 60, 246);
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 30px;
+}
+
