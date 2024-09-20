@@ -1,16 +1,12 @@
 import React from 'react';
-import classes from '../AddContent.module.scss'
+import classes from '../../AddContent.module.scss'
 const AddTitleName = () => {
+
     const [selectedFile, setSelectedFile] = React.useState('');
     const [fileName, setFileName] = React.useState('No selected file');
 
-    const handleFileChange = (event) => {
-        setSelectedFile(event.target.files[0]);
-    };
-    console.log({event});
     return (
-        <form
-            action={''}
+        <div
             className={classes.form}
         >
             <input
@@ -34,7 +30,7 @@ const AddTitleName = () => {
                     <input type="text"/>
                 </div>
             </div>
-        </form>
+        </div>
     );
 };
 

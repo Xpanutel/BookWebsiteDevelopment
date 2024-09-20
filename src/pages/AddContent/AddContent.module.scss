@@ -1,0 +1,140 @@
+.addcontent {
+  background-color: #f6f6f6;
+
+  .container {
+    margin: auto;
+
+    form {
+      .container_inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        gap: 50px;
+
+        .containername {
+          background-color: white;
+          padding: 20px;
+          border-radius: 10px;
+
+        }
+
+        .container_description {
+          background-color: white;
+          padding: 20px;
+          border-radius: 10px;
+          height: 300px;
+          max-height: 300px;
+          overflow: hidden;
+        }
+
+        .book_type {
+          background-color: white;
+          padding: 20px;
+          border-radius: 10px;
+
+          .form_inner {
+            display: grid;
+            gap: 20px;
+
+
+            .form_type {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              align-items: center;
+              gap: 20px;
+
+
+            }
+          }
+
+
+        }
+
+        .form {
+          display: flex;
+          gap: 20px;
+
+          input:first-child {
+            display: flex;
+            height: 270px;
+            width: 190px;
+            cursor: pointer;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+            background-size: 100% 100%;
+
+          }
+
+          input[type='file'] {
+            color: transparent;
+            background-color: #ececec;
+          }
+
+          input::file-selector-button {
+            display: none;
+          }
+
+          .read_title {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            div {
+              display: grid;
+              gap: 10px;
+
+              label {
+                height: 40px;
+                align-items: center;
+                display: flex;
+              }
+
+              input {
+                width: 100%;
+                font-size: 17px;
+                padding: 0 10px;
+                height: 40px;
+              }
+            }
+          }
+
+        }
+      }
+
+      .form_button {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+
+        button {
+          width: 100%;
+          padding: 10px;
+          border-radius: 10px;
+          background-color: #3d52d5;
+          color: white;
+        }
+      }
+
+      input {
+        display: flex;
+        height: 270px;
+        width: 100%;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        background-size: 100% 100%;
+      }
+
+      input[type='file'] {
+
+        align-items: center;
+      }
+
+      input::file-selector-button {
+        display: none;
+      }
+    }
+  }
+
+}

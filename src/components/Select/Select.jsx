@@ -1,6 +1,6 @@
 import React from 'react';
 import Select from 'react-select'
-
+import '../../index.css'
 const FilterSelect = () => {
 
     const options = [
@@ -12,6 +12,7 @@ const FilterSelect = () => {
     return (
         <>
             <Select
+
                 className={'react-select-container'}
                 classNamePrefix="react-select"
                 options={options}
@@ -24,6 +25,7 @@ const FilterSelect = () => {
                         borderRadius:"15px",
                         padding:"5px",
                         fontSize:'16px',
+                        input:"16px"
                     }),
                     multiValue:(baseStyles)=>({
                         ...baseStyles,

@@ -66,3 +66,13 @@ body {
     margin: 0 auto;
     padding: 0 15px;
 }
+.react-select-container{
+	height: 100%;
+	width: 100%;
+	display: grid;
+	align-items: center;
+}
+
+.react-select-container input{
+	height: 100% !important;
+}

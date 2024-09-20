@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home.jsx";
 import CardInner from "../components/CardInner/CardInner.jsx";
 import SingIn from "../components/SingIn/login/SingIn.jsx";
 import Catalog from "../pages/Catalog/CatalogReacl/Catalog.jsx";
+import AddContent from "../pages/AddContent/AddContent.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
             {
                 path:'catalog',
                 element:<Catalog/>
+            },
+            {
+                path:'addContent',
+                element:<AddContent/>
             }
         ]
     }
