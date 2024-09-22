@@ -2,9 +2,10 @@ import {createBrowserRouter} from "react-router-dom";
 import Layout from "../pages/Layout/Layout.jsx";
 import Home from "../pages/Home/Home.jsx";
 import CardInner from "../components/CardInner/CardInner.jsx";
-import SingIn from "../components/SingIn/login/SingIn.jsx";
+import SignIn from "../components/SingIn/login/SignIn.jsx";
 import Catalog from "../pages/Catalog/CatalogReacl/Catalog.jsx";
 import AddContent from "../pages/AddContent/AddContent.jsx";
+import Marks from "../pages/marks/Marks.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -21,7 +22,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:'login',
-                element:<SingIn/>
+                element:<SignIn/>
             },
             {
                 path:'catalog',
@@ -30,7 +31,11 @@ export const router = createBrowserRouter([
             {
                 path:'addContent',
                 element:<AddContent/>
-            }
+            },
+            {
+                path:'marks',
+                element:<Marks/>
+            },
         ]
     }
 ])

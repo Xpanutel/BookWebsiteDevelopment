@@ -1,0 +1,43 @@
+.container {
+    background-color: #f5f5f5;
+}
+
+.container_inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 20px;
+    position: relative;
+    padding-top: 40px;
+}
+.mark_items{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    align-items: center;
+}
+.category{
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.mark_items ul {
+    display: flex;
+}
+
+.mark_items ul li {
+    display: flex;
+    gap: 5px;
+    padding: 10px;
+}
+
+.mark_items ul li:hover {
+    background-color: #f3f3f3;
+    cursor: pointer;
+}
+
+.active {
+    border-bottom: 3px solid #7571f3;
+}
+.active:hover{
+
+}

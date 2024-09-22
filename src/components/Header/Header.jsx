@@ -34,7 +34,7 @@ function Header() {
                         </nav>
                     </section>
                     <section className="header__right">
-                        <a className="header__marks" href="#">Закладки</a>
+                        <Link to={'marks'} className="header__marks" href="#">Закладки</Link>
                         <div className="header__themes themes">
                             <div className="themes__indicator"></div>
                             <div className="themes__icon-container">
@@ -51,7 +51,6 @@ function Header() {
                         {
                             login ? <img src={omg} alt=""/> : <button className="header__blue-button">Войти</button>
                         }
-
                     </section>
                 </section>
             </header>

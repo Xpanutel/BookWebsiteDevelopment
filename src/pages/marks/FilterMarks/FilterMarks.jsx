@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import classes from './FilterTitles.module.scss';
-import { MdOutlineShortText } from "react-icons/md";
+import React, {useEffect, useState} from 'react';
+import classes from "./FilterMarks.module.scss"
+import {MdOutlineShortText} from "react-icons/md";
 
 const list = [
-    { name: 'По дате добавления(ASC)', sortProps: 'DATE_ASC' },
-    { name: 'По дате добавления(DESC)', sortProps: 'DATE_DESC' },
-    { name: 'По рейтингу(ASC)', sortProps: 'RAITING_ASC' },
-    { name: 'По рейтингу(DESC)', sortProps: 'RAITING_DESC' },
+    {name: 'По дате добавления(ASC)', sortProps: 'DATE_ASC'},
+    {name: 'По дате добавления(DESC)', sortProps: 'DATE_DESC'},
+    {name: 'По рейтингу(ASC)', sortProps: 'RAITING_ASC'},
+    {name: 'По рейтингу(DESC)', sortProps: 'RAITING_DESC'},
 ];
 
-const FilterTitles = () => {
+function FilterMarks(){
+
     const [open, setOpen] = useState(false);
+
     const [selectedItem, setSelectedItem] = useState(list[0]);
     useEffect(() => {
         const handleOutsideClick = (event) => {
@@ -25,10 +27,10 @@ const FilterTitles = () => {
     }, [open]);
     return (
         <div className={classes.container}>
-                <div onClick={() => setOpen(!open)} className={classes.popular}>
-                    <div><MdOutlineShortText/></div>
-                    <div>{selectedItem.name} </div>
-                </div>
+            <div onClick={() => setOpen(!open)} className={classes.popular}>
+                <div><MdOutlineShortText/></div>
+                <div>{selectedItem.name} </div>
+            </div>
 
             {open && (
                 <div className={classes.sort} onClick={(event) => event.stopPropagation()}>
@@ -50,6 +52,6 @@ const FilterTitles = () => {
             )}
         </div>
     );
-};
+}
 
-export default FilterTitles;
+export default FilterMarks;
