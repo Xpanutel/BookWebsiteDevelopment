@@ -13,7 +13,7 @@ const carouselItem = {
   author: "Манга",
 };
 
-// данные в главном (первом) слайдере
+// данные в слайдере
 const carouselItems = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].fill(
   carouselItem,
   0,
@@ -65,7 +65,7 @@ const Home = () => {
       <Slider data={carouselItems} />
 
       <div className={styles.content}>
-        <SliderWithNavigation data={carouselCategory} />
+        <SliderWithNavigation name="hot_news" />
         <div className={styles.content_columns}>
           {contentColumnData.map((i, index) => (
             <div className={styles.content_column} key={index}>
@@ -96,8 +96,8 @@ const Home = () => {
             </div>
           ))}
         </div>
-        <SliderWithNavigation data={carouselCategory} />
-        <SliderWithNavigation data={carouselCategory} />
+        <SliderWithNavigation name="short_stories" />
+        <SliderWithNavigation name="interesting_news" />
         <div className={styles.advices}>
           {advices.map((i, index) => (
             <Link to={i.link} className={styles.advice} key={index}>
@@ -131,13 +131,13 @@ const Home = () => {
             </div>
           ))}
         </div>
-        <SliderWithNavigation data={carouselCategory} />
-        <SliderWithNavigation data={carouselCategory} />
-        <SliderWithNavigation data={carouselCategory} />
-        <SliderWithNavigation data={carouselCategory} />
-        <SliderWithNavigation data={carouselCategory} />
-        <SliderWithNavigation data={carouselCategory} />
-        <SliderWithNavigation data={carouselCategory} />
+        <SliderWithNavigation name="fresh_chapters" />
+        <SliderWithNavigation name="top_korea" />
+        <SliderWithNavigation name="top_japan" />
+        <SliderWithNavigation name="top_china" />
+        <SliderWithNavigation name="with_anime" />
+        <SliderWithNavigation name="many_chapters" />
+        <SliderWithNavigation name="new" />
       </div>
     </main>
   );

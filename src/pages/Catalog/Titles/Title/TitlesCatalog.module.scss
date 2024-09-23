@@ -1,0 +1,27 @@
+.titles_catalog{
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 10px;
+  row-gap: 40px;
+
+  .description{
+    display: grid;
+    gap: 5px;
+    img{
+      width: 100%;
+    }
+    div{
+      display: flex;
+      gap: 10px;
+      font-size: 13px;
+      span{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+    }
+    span{
+      font-size: 14px;
+    }
+  }
+}

@@ -1,0 +1,47 @@
+.conteiner{
+  position: relative;
+
+  .container_open{
+
+
+  }
+  ul{
+    z-index: 10000;
+    position: absolute;
+    margin-top: 30px;
+    padding: 10px 0 10px 0 ;
+    box-shadow: 0 0 8px rgba(0,0,0,0.4);
+    border-radius: 15px;
+    background-color: #262626;
+    display: grid;
+    color: white;
+    width: 300px;
+    max-width: 300px;
+
+    li{
+      display: flex;
+      align-items: center;
+      padding: 20px 30px;
+      font-size: 13px;
+
+      img{
+        border-radius: 50%;
+        background-color: red;
+        height: 50px;
+        width: 50px;
+      }
+    }
+    li:first-child{
+      gap: 20px;
+      font-size: 14px;
+    }
+    li:first-child:hover{
+      background-color: inherit;
+      border-radius: inherit;
+    }
+    li:hover{
+      background-color: #383838;
+      cursor: pointer;
+    }
+  }
+}
