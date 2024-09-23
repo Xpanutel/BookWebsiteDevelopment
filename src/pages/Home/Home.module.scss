@@ -9,6 +9,17 @@
 .carousel {
   width: 100%;
 
+  &_navigation {
+    display: flex;
+    justify-content: space-between;
+
+    > a {
+      color: #1976d2;
+      font-size: 0.9rem;
+      text-transform: lowercase;
+    }
+  }
+
   &_item {
     display: flex;
     flex-direction: column;
@@ -180,7 +191,7 @@
 }
 
 .advice {
-  padding: 48px 160px 48px 48px;
+  padding: 48px 170px 48px 48px;
   background: #fff;
   border-radius: 12px;
   position: relative;
@@ -189,8 +200,13 @@
     display: flex;
     flex-direction: column;
 
+    &_title {
+      font-size: 1.16rem;
+      line-height: 1.5rem;
+    }
+
     &_desc {
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       font-size: 1rem;
       color: rgba(0, 0, 0, 0.7);
       margin-top: 3px;
@@ -237,7 +253,7 @@
   gap: 12px;
   overflow-y: auto;
   height: auto;
-  
+
   ::-webkit-scrollbar {
     display: none;
   }

@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Home.module.scss";
-import { Carousel, CarouselProvider } from "nuka-carousel";
-import star from "../../images/star.svg";
+import SliderWithNavigation from "../../components/SliderWithNavigationn/Slider";
 import { Link } from "react-router-dom";
+import Slider from "../../components/Slider/Slider";
 
 const carouselItem = {
   img: "https://remanga.org/media/titles/discarded-garbage-is-not-picked-up-again/c5183e21fe0253ea10c6659176f7dea9.jpg",
@@ -13,14 +13,14 @@ const carouselItem = {
   author: "Манга",
 };
 
-// данные в слайдере
+// данные в главном (первом) слайдере
 const carouselItems = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].fill(
   carouselItem,
   0,
   16
 );
 
-const news = [0, 0, 0].fill(
+const contentColumnData = [0, 0, 0].fill(
   {
     title: "Новый сезон ",
     list: [0, 0, 0, 0, 0].fill(carouselItem, 0, 5),
@@ -28,6 +28,16 @@ const news = [0, 0, 0].fill(
   0,
   3
 );
+
+//данные в остальных слайдерах
+
+const carouselCategory = {
+  title: "Горячие новинки",
+  link: "/",
+  list: carouselItems,
+};
+
+//данные в блоке advices
 
 const advices = [0, 0, 0].fill(
   {
@@ -52,53 +62,12 @@ const categories = [0, 0, 0, 0].fill({
 const Home = () => {
   return (
     <main className={styles.main}>
-      <CarouselProvider>
-        <Carousel className={styles.carousel} showArrows="hover">
-          {carouselItems.map((i, index) => (
-            <div className={styles.carousel_item} key={index}>
-              <figure>
-                <img
-                  className={styles.carousel_item_img}
-                  src={i.img}
-                  alt={i.name}
-                />
-              </figure>
-              <span className={styles.carousel_item_rating}>
-                {i.rating}
-                <img src={star} alt="" />
-              </span>
-              <p className={styles.carousel_item_name}>{i.name}</p>
-            </div>
-          ))}
-        </Carousel>
-      </CarouselProvider>
+      <Slider data={carouselItems} />
 
       <div className={styles.content}>
-        <div className={styles.content_carouselWrapper}>
-          <h1 className={styles.content_heading}>Горячие новинки</h1>
-
-          <Carousel swiping className={styles.carousel} showArrows="hover">
-            {carouselItems.map((i, index) => (
-              <div className={styles.carousel_item} key={index}>
-                <figure>
-                  <img
-                    className={styles.carousel_item_img}
-                    src={i.img}
-                    alt={i.name}
-                  />
-                </figure>
-                <span className={styles.carousel_item_rating}>
-                  {i.rating}
-                  <img src={star} alt="" />
-                </span>
-                <p className={styles.carousel_item_name}>{i.name}</p>
-              </div>
-            ))}
-          </Carousel>
-        </div>
-
+        <SliderWithNavigation data={carouselCategory} />
         <div className={styles.content_columns}>
-          {news.map((i, index) => (
+          {contentColumnData.map((i, index) => (
             <div className={styles.content_column} key={index}>
               <h1 className={styles.content_heading}>
                 {i.title}
@@ -106,8 +75,8 @@ const Home = () => {
                   <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                 </svg>
               </h1>
-              {i.list.map((l) => (
-                <div className={styles.content_column_item}>
+              {i.list.map((l, index) => (
+                <div className={styles.content_column_item} key={index}>
                   <img
                     src={l.img}
                     alt=""
@@ -127,51 +96,8 @@ const Home = () => {
             </div>
           ))}
         </div>
-
-        <div className={styles.content_carouselWrapper}>
-          <h1 className={styles.content_heading}>Интересные новинки</h1>
-          <Carousel swiping className={styles.carousel} showArrows="hover">
-            {carouselItems.map((i, index) => (
-              <div className={styles.carousel_item} key={index}>
-                <figure>
-                  <img
-                    className={styles.carousel_item_img}
-                    src={i.img}
-                    alt={i.name}
-                  />
-                </figure>
-                <span className={styles.carousel_item_rating}>
-                  {i.rating}
-                  <img src={star} alt="" />
-                </span>
-                <p className={styles.carousel_item_name}>{i.name}</p>
-              </div>
-            ))}
-          </Carousel>
-        </div>
-
-        <div className={styles.content_carouselWrapper}>
-          <h1 className={styles.content_heading}>Интересные новинки</h1>
-          <Carousel swiping className={styles.carousel} showArrows="hover">
-            {carouselItems.map((i, index) => (
-              <div className={styles.carousel_item} key={index}>
-                <figure>
-                  <img
-                    className={styles.carousel_item_img}
-                    src={i.img}
-                    alt={i.name}
-                  />
-                </figure>
-                <span className={styles.carousel_item_rating}>
-                  {i.rating}
-                  <img src={star} alt="" />
-                </span>
-                <p className={styles.carousel_item_name}>{i.name}</p>
-              </div>
-            ))}
-          </Carousel>
-        </div>
-
+        <SliderWithNavigation data={carouselCategory} />
+        <SliderWithNavigation data={carouselCategory} />
         <div className={styles.advices}>
           {advices.map((i, index) => (
             <Link to={i.link} className={styles.advice} key={index}>
@@ -188,23 +114,30 @@ const Home = () => {
             </Link>
           ))}
         </div>
-
         <div className={styles.categories}>
           {categories.map((i, index) => (
             <div className={styles.category} key={index}>
               <h1 className={styles.content_heading}>{i.title}</h1>
               <figure className={styles.category_imgWrapper}>
-                {i.images.map((img) => (
+                {i.images.map((img, index) => (
                   <img
                     className={styles.category_imgWrapper_img}
                     src={img}
                     alt=""
+                    key={index}
                   />
                 ))}
               </figure>
             </div>
           ))}
         </div>
+        <SliderWithNavigation data={carouselCategory} />
+        <SliderWithNavigation data={carouselCategory} />
+        <SliderWithNavigation data={carouselCategory} />
+        <SliderWithNavigation data={carouselCategory} />
+        <SliderWithNavigation data={carouselCategory} />
+        <SliderWithNavigation data={carouselCategory} />
+        <SliderWithNavigation data={carouselCategory} />
       </div>
     </main>
   );
