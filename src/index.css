@@ -94,7 +94,7 @@ h6 {
 
 body {
   background-color: var(--light-white);
-	font-family: "Exo 2", sans-serif;
+  font-family: "Exo 2", sans-serif;
   font-weight: 100;
   font-style: normal;
   color: #000;
@@ -119,13 +119,14 @@ body {
 .nuka-nav-button:hover {
   opacity: 0.7 !important;
 }
-.react-select-container{
-	height: 100%;
-	width: 100%;
-	display: grid;
-	align-items: center;
+
+.react-select-container {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  align-items: center;
 }
 
-.react-select-container input{
-	height: 100% !important;
+.react-select-container input {
+  height: 100% !important;
 }

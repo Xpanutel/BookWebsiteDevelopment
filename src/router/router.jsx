@@ -38,7 +38,7 @@ export const router = createBrowserRouter([
         element: <Marks />,
       },
       {
-        path: "single/:id",
+        path: "manga/:id",
         element: <Single />,
       },
     ],
