@@ -1,4 +1,4 @@
-export const reCount = (state = 1, action) => {
+export const reCount = (state = 3, action) => {
   switch (action.type) {
     case "INC":
       return state++;
