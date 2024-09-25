@@ -5,7 +5,7 @@ import Logotype from '../Logotype/Logotype.jsx';
 import {Link} from "react-router-dom";
 import omg from '../../as/images.jpeg'
 
-function Header() {
+function Header() { 
     const login = true
     const [open, setOpen] = React.useState(false);
     return (
