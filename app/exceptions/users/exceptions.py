@@ -12,6 +12,10 @@ class UsersRegisterOK(BaseException):
 class UserAlreadyExistsException(BaseException):
     status_code=status.HTTP_409_CONFLICT
     detail="Пользователь уже существует"
+    
+class UserAlreadyExistsUsername(BaseException):
+    status_code=status.HTTP_409_CONFLICT
+    detail="Такой username уже используется"
         
 class IncorrectEmailOrPasswordException(BaseException):
     status_code=status.HTTP_401_UNAUTHORIZED
@@ -63,3 +67,12 @@ class UserPasswordComplete(BaseException):
 class UserUsernameValidate(BaseException):
     status_code=status.HTTP_400_BAD_REQUEST
     detail="Имя должно быть в пределах 3-20 символов"
+    
+class UserJsonDecodeError(BaseException):
+    status_code=status.HTTP_400_BAD_REQUEST
+    detail="Код не действителен"
+    
+class UserVKError(BaseException):
+    status_code=status.HTTP_400_BAD_REQUEST
+    detail="device_id или code не действителен"
+    

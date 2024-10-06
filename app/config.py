@@ -24,7 +24,19 @@ class Settings(BaseSettings):
     SMTP_USER: str
     SMTP_PASS: str
     
-    APP_HOST: str
+    APP_FRONT_HOST: str
+    
+    GOOGLE_CLIENT_ID: str
+    GOOGLE_CLIENT_SECRET: str
+    GOOGLE_REDIRECT_URI: str
+    
+    YANDEX_CLIENT_ID: str
+    YANDEX_CLIENT_SECRET: str
+    YANDEX_REDIRECT_URI: str
+    
+    VK_CLIENT_ID: str
+    VK_CLIENT_SECRET: str
+    VK_REDIRECT_URI: str
     
     
     def __init__(self, *args, **kwargs):

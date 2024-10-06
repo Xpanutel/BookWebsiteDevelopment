@@ -25,6 +25,7 @@ class SUser(BaseModel):
     id: UUID
     email: EmailStr
     username: str
+    img: str
     role: str
     
 class SUserAccessToken(BaseModel):
@@ -37,3 +38,17 @@ class ResetForegetPassword(BaseModel):
     secret_token: str
     new_password: str
     confirm_password: str
+    
+class GoogleAuthError(BaseModel):
+    code: int
+    message: str 
+
+class SGoogleAuthError(BaseModel):
+    error: GoogleAuthError
+    
+class SUserURLResponse(BaseModel):
+    url: str
+    
+class SVKAuthError(BaseModel):
+    error: str
+    error_description: str
