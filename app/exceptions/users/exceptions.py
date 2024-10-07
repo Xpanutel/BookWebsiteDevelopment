@@ -46,7 +46,7 @@ class UserCheckAdminRole(BaseException):
     
 class UserCheckAValidEmail(BaseException):
     status_code=status.HTTP_403_FORBIDDEN
-    detail="Неверный адрес электронной почты"
+    detail="Данный email не зарегистрирован"
     
 class UserForgetPasswordOK(BaseException):
     status_code=status.HTTP_201_CREATED
@@ -58,7 +58,7 @@ class TokenExpiredExceptionError(BaseException):
     
 class UserConfirmPasswordError(BaseException):
     status_code=status.HTTP_401_UNAUTHORIZED
-    detail="Введённые пароли не совпадают"
+    detail="Пароли не совпадают"
     
 class UserPasswordComplete(BaseException):
     status_code=status.HTTP_201_CREATED
@@ -76,3 +76,19 @@ class UserVKError(BaseException):
     status_code=status.HTTP_400_BAD_REQUEST
     detail="device_id или code не действителен"
     
+    
+class UserCheckPassword(BaseException):
+    status_code=status.HTTP_400_BAD_REQUEST
+    detail="Длина пароля должна составлять минимум 8 символов"
+    
+class UserCheckOLDPassword(BaseException):
+    status_code=status.HTTP_400_BAD_REQUEST
+    detail="Старый пароль указан не верно"
+    
+class UserDeleteOK(BaseException):
+    status_code=status.HTTP_200_OK
+    detail="Пользователь полностью удалён"
+    
+class UserChangeOK(BaseException):
+    status_code=status.HTTP_200_OK
+    detail="Изменено"

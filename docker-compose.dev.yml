@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16
+    container_name: remanga_db_dev
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+    env_file:
+      - .env.docker
+    ports:
+      - 5432:5432
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: remanga_app_dev
+    env_file:
+      - .env.docker
+    depends_on:
+      - db
+      - redis
+    command: sh -c "sleep 5 && alembic upgrade head && gunicorn app.main:app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000"
+    ports:
+      - 8000:8000
+
+  redis:
+    image: redis:7
+    container_name: remanga_redis_dev
+
+  celery:
+    image: klaxer/remanga_app_dev:latest
+    container_name: remanga_celery_dev
+    command: sh -c "celery --app=app.tasks.celery:celery worker -l INFO"
+    env_file:
+      - .env.docker
+    depends_on:
+      - redis
+
+
+volumes:
+  postgresdata:

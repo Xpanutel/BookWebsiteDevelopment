@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Optional
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     DB_PORT: str
     DB_USER: str
     DB_PASS: str
+    
 
     SECRET_KEY: str
     ALGORITHM: str

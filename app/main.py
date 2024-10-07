@@ -31,6 +31,7 @@ origins = [
     "http://localhost:3000",
     "ws://localhost:3001",
     "ws://localhost:3000",
+    settings.APP_FRONT_HOST
 ]
 
 app.add_middleware(

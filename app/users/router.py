@@ -12,8 +12,11 @@ from app.exceptions.users.exceptions import (
     TokenExpiredExceptionError,
     UserAlreadyExistsException,
     UserAlreadyExistsUsername,
+    UserChangeOK,
     UserCheckAValidEmail,
+    UserCheckOLDPassword,
     UserConfirmPasswordError,
+    UserDeleteOK,
     UserExit,
     UserForgetPasswordOK,
     UserJsonDecodeError,
@@ -22,11 +25,11 @@ from app.exceptions.users.exceptions import (
 )
 from app.config import settings
 from app.tasks.tasks import send_email_forget_password
-from app.users.auth import authenticate_user, create_access_token, create_reset_password_token, decode_reset_password_token, get_password_hash
+from app.users.auth import authenticate_user, create_access_token, create_reset_password_token, decode_reset_password_token, get_password_hash, verify_password
 from app.users.dao import UsersDAO
 from app.users.dependencies import get_current_user
 from app.users.models import Users
-from app.users.schemas import ForgetPasswordRequest, ResetForegetPassword, SGoogleAuthError, SUser, SUserAccessToken, SUserLogin, SUserRegister, SUserURLResponse, SVKAuthError
+from app.users.schemas import SForgetPasswordRequest, SResetForegetPassword, SChangePassword, SUser, SUserAccessToken, SUserLogin, SUserRegister, SUserURLResponse, SUserUpdateInfo, SVKAuthError
 from utils.generate_code_vk import generate_code_challenge, generate_code_verifier
 
 router_auth = APIRouter(
@@ -41,7 +44,7 @@ router = APIRouter(
 
 #Register
 @router_auth.post("/register/email", status_code=201)
-async def register_user(user_data: SUserRegister) -> SUser:
+async def register_user(response: Response, user_data: SUserRegister) -> Union[SUser, SException]:
     existing_user = await UsersDAO.find_one_or_none(email=user_data.email)
     check_username = await UsersDAO.find_one_or_none(username=user_data.username)
     if existing_user:
@@ -54,6 +57,8 @@ async def register_user(user_data: SUserRegister) -> SUser:
     new_user = await UsersDAO.add(email=user_data.email, username=user_data.username, hashed_password=hashed_password, role="user")
     if not new_user:
         raise CannotAddDataToDatabase
+    access_token = create_access_token({"sub": str(new_user.id)})
+    response.set_cookie("access_token", access_token, httponly=True)
     return new_user
 
 @router_auth.get("/google")
@@ -157,8 +162,7 @@ async def auth_vk(
     async with AsyncClient() as client:
         response = await client.post(token_url, data=data, headers={"Content-Type": "application/x-www-form-urlencoded"})
         id_token = response.json().get("id_token")
-        print(response.json())
-        print(id_token)
+        
         user_info = await client.post(
             "https://id.vk.com/oauth2/public_info", 
             data={
@@ -167,7 +171,6 @@ async def auth_vk(
                 },
             headers={"Content-Type": "application/x-www-form-urlencoded"})
         user_data = user_info.json()
-        print(user_data)
         
         user_info_text = user_info.text
         user_info_data = json.loads(user_info_text)
@@ -222,10 +225,10 @@ async def login_vk(response: Response) -> SUserURLResponse:
         "url": f"https://id.vk.com/authorize?response_type=code&client_id={settings.VK_CLIENT_ID}&code_challenge={code_challenge}&code_challenge_method=s256&state={state}&redirect_uri={settings.VK_REDIRECT_URI}&code_verifie={code_verifier}"
     } 
 
-@router_auth.post("/logout")
+@router_auth.post("/logout", status_code=200)
 async def logout_user(response: Response) -> SException:
     response.delete_cookie("access_token")
-    raise UserExit
+    return {"detail": "Вы вышли из системы"}
 
 @router.get("/me")
 async def read_user_me(user: Users = Depends(get_current_user)) -> SUser:
@@ -233,7 +236,10 @@ async def read_user_me(user: Users = Depends(get_current_user)) -> SUser:
 
 
 @router_auth.post("/forget-password")
-async def forget_password(fpr: ForgetPasswordRequest) -> SException:
+async def forget_password(fpr: SForgetPasswordRequest) -> SException:
+    check_user = await UsersDAO.find_one_or_none(email=fpr.email)
+    if not check_user:
+        raise UserCheckAValidEmail
     secret_token = create_reset_password_token(email=fpr.email)
     forget_url_link = f"{settings.APP_FRONT_HOST}/forget-password/{secret_token}"
     
@@ -242,7 +248,7 @@ async def forget_password(fpr: ForgetPasswordRequest) -> SException:
 
 @router_auth.post("/reset-password")
 async def reset_password(
-    rfp: ResetForegetPassword,
+    rfp: SResetForegetPassword,
 ) -> SException:
     info = decode_reset_password_token(token=rfp.secret_token)
     if info is None:
@@ -252,8 +258,38 @@ async def reset_password(
 
     hashed_password = get_password_hash(rfp.new_password) 
     user = await UsersDAO.find_one_or_none(email=info)
-    await UsersDAO.update_password(email=user.email, hashed_password=hashed_password)
+    await UsersDAO.update_password(id=user.id, hashed_password=hashed_password)
     raise UserPasswordComplete
+
+@router_auth.post("/change-password")
+async def change_password(user_data: SChangePassword, user: Users = Depends(get_current_user)):
+    check_password = verify_password(user_data.old_password, user.hashed_password)
+    if not check_password:
+        raise UserCheckOLDPassword
+    if user_data.new_password != user_data.confirm_password:
+        raise UserConfirmPasswordError
+    hashed_password = get_password_hash(user_data.new_password) 
+    await UsersDAO.update_password(id=user.id, hashed_password=hashed_password)
+    raise UserPasswordComplete
+
+@router.delete("/delete", status_code=200)
+async def user_delete(response: Response, user: Users = Depends(get_current_user)) -> SException:
+    await UsersDAO.delete(id=user.id)
+    response.delete_cookie("access_token")
+    return {"detail": "Аккаунт полностью удалён"}
+
+@router.patch("/change")
+async def user_change(user_data: SUserUpdateInfo, user: Users = Depends(get_current_user)):
+    update_user = await UsersDAO.update_user_info(
+        id=user.id, 
+        about_me=user_data.about_me,
+        sex=user_data.sex,
+        hiding_yaoi=user_data.hiding_yaoi,
+        hiding_hentai=user_data.hiding_hentai
+        )
+    return update_user 
+    
+    
 
 
 
