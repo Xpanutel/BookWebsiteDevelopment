@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.users.router import router as user_router
 from app.users.router import router_auth as auth_user_router
+from app.images.router import router as images_router
 from redis import asyncio as aioredis
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
@@ -25,12 +26,9 @@ app = FastAPI(
 
 app.include_router(user_router)
 app.include_router(auth_user_router)
+app.include_router(images_router)
 
 origins = [
-    "http://localhost:3001",
-    "http://localhost:3000",
-    "ws://localhost:3001",
-    "ws://localhost:3000",
     settings.APP_FRONT_HOST
 ]
 

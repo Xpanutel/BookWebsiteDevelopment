@@ -33,7 +33,7 @@ async def get_current_user(token: str = Depends(get_token)):
     user_id: str = payload.get("sub")
     if not user_id:
         raise UserIsNotPresentException
-    user = await UsersDAO.find_one_or_none(id=UUID(user_id))
+    user = await UsersDAO.find_one_or_none_user(id=UUID(user_id))
     if not user:
         raise UserIsNotPresentException
 

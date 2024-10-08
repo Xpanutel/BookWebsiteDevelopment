@@ -39,6 +39,11 @@ class Settings(BaseSettings):
     VK_CLIENT_SECRET: str
     VK_REDIRECT_URI: str
     
+    ACCESS_KEY_S3: str
+    SECRET_KEY_S3: str
+    ENDPOINT_URL_S3: str
+    BUCKET_NAME_S3: str
+    DOMAIN_S3: str
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

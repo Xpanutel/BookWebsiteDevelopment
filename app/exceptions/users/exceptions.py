@@ -16,6 +16,10 @@ class UserAlreadyExistsException(BaseException):
 class UserAlreadyExistsUsername(BaseException):
     status_code=status.HTTP_409_CONFLICT
     detail="Такой username уже используется"
+    
+class UserAlreadyExistsEmail(BaseException):
+    status_code=status.HTTP_409_CONFLICT
+    detail="Такой email уже используется"
         
 class IncorrectEmailOrPasswordException(BaseException):
     status_code=status.HTTP_401_UNAUTHORIZED
@@ -45,7 +49,7 @@ class UserCheckAdminRole(BaseException):
     detail="Недостаточно прав"
     
 class UserCheckAValidEmail(BaseException):
-    status_code=status.HTTP_403_FORBIDDEN
+    status_code=status.HTTP_404_NOT_FOUND
     detail="Данный email не зарегистрирован"
     
 class UserForgetPasswordOK(BaseException):
@@ -57,7 +61,7 @@ class TokenExpiredExceptionError(BaseException):
     detail="Неверный токен или срок его действия истек"
     
 class UserConfirmPasswordError(BaseException):
-    status_code=status.HTTP_401_UNAUTHORIZED
+    status_code=status.HTTP_400_BAD_REQUEST
     detail="Пароли не совпадают"
     
 class UserPasswordComplete(BaseException):
@@ -92,3 +96,19 @@ class UserDeleteOK(BaseException):
 class UserChangeOK(BaseException):
     status_code=status.HTTP_200_OK
     detail="Изменено"
+    
+class UserSexError(BaseException):
+    status_code=status.HTTP_400_BAD_REQUEST
+    detail="Поле sex может быть только от 0 до 2"
+    
+class UserHidingYaoiError(BaseException):
+    status_code=status.HTTP_400_BAD_REQUEST
+    detail="Поле hiding_yaoi может быть только от 0 до 2"
+    
+class UserHidingHentaiError(BaseException):
+    status_code=status.HTTP_400_BAD_REQUEST
+    detail="Поле hiding_hentai может быть только от 0 до 2"
+    
+class UserAboutMeError(BaseException):
+    status_code=status.HTTP_400_BAD_REQUEST
+    detail="Слишком большой рассказ о себе"

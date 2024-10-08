@@ -10,6 +10,7 @@ from app.exceptions.schemas import SException
 from app.exceptions.users.exceptions import (
     CannotAddDataToDatabase,
     TokenExpiredExceptionError,
+    UserAlreadyExistsEmail,
     UserAlreadyExistsException,
     UserAlreadyExistsUsername,
     UserChangeOK,
@@ -26,7 +27,7 @@ from app.exceptions.users.exceptions import (
 from app.config import settings
 from app.tasks.tasks import send_email_forget_password
 from app.users.auth import authenticate_user, create_access_token, create_reset_password_token, decode_reset_password_token, get_password_hash, verify_password
-from app.users.dao import UsersDAO
+from app.users.dao import UsersDAO, UsersProfileDAO
 from app.users.dependencies import get_current_user
 from app.users.models import Users
 from app.users.schemas import SForgetPasswordRequest, SResetForegetPassword, SChangePassword, SUser, SUserAccessToken, SUserLogin, SUserRegister, SUserURLResponse, SUserUpdateInfo, SVKAuthError
@@ -45,16 +46,16 @@ router = APIRouter(
 #Register
 @router_auth.post("/register/email", status_code=201)
 async def register_user(response: Response, user_data: SUserRegister) -> Union[SUser, SException]:
-    existing_user = await UsersDAO.find_one_or_none(email=user_data.email)
-    check_username = await UsersDAO.find_one_or_none(username=user_data.username)
-    if existing_user:
-        raise UserAlreadyExistsException
+    check_username = await UsersProfileDAO.find_one_or_none(username=user_data.username)
+    check_email = await UsersDAO.find_one_or_none(email=user_data.email)
     if check_username:
         raise UserAlreadyExistsUsername
+    if check_email:
+        raise UserAlreadyExistsEmail
     if user_data.password != user_data.confirm_password:
         raise UserConfirmPasswordError
     hashed_password = get_password_hash(user_data.password)
-    new_user = await UsersDAO.add(email=user_data.email, username=user_data.username, hashed_password=hashed_password, role="user")
+    new_user = await UsersDAO.add_user(email=user_data.email, username=user_data.username, hashed_password=hashed_password, role="user")
     if not new_user:
         raise CannotAddDataToDatabase
     access_token = create_access_token({"sub": str(new_user.id)})
@@ -92,7 +93,7 @@ async def auth_google(
         
         password = uuid.uuid4()
         hashed_password = get_password_hash(str(password))
-        new_user = await UsersDAO.add(email=user_data["email"], username=user_data["email"], hashed_password=hashed_password, img=user_data["picture"], role="user")
+        new_user = await UsersDAO.add_user(email=user_data["email"], role="user", hashed_password=hashed_password, username=user_data["email"], img=user_data["picture"])
         
         if not new_user:
             raise CannotAddDataToDatabase
@@ -129,7 +130,7 @@ async def auth_yandex(response_auth: Response, code: str = Query(..., descriptio
             password = uuid.uuid4()
             hashed_password = get_password_hash(str(password))
             img = f"https://avatars.yandex.net/get-yapic/{user_data['default_avatar_id']}/islands-200"
-            new_user = await UsersDAO.add(email=user_data["default_email"], username=user_data["default_email"], hashed_password=hashed_password, img=img, role="user")
+            new_user = await UsersDAO.add_user(email=user_data["default_email"], username=user_data["default_email"], hashed_password=hashed_password, role="user", img=img)
             
             if not new_user:
                 raise CannotAddDataToDatabase
@@ -186,7 +187,7 @@ async def auth_vk(
         
         password = uuid.uuid4()
         hashed_password = get_password_hash(str(password))
-        new_user = await UsersDAO.add(email=user_data["user"]["email"], username=user_data["user"]["email"], hashed_password=hashed_password, img=user_data["user"]["avatar"], role="user")
+        new_user = await UsersDAO.add_user(email=user_data["user"]["email"], username=user_data["user"]["email"], hashed_password=hashed_password, role="user", img=user_data["user"]["avatar"])
         
         if not new_user:
             raise CannotAddDataToDatabase
@@ -279,15 +280,26 @@ async def user_delete(response: Response, user: Users = Depends(get_current_user
     return {"detail": "Аккаунт полностью удалён"}
 
 @router.patch("/change")
-async def user_change(user_data: SUserUpdateInfo, user: Users = Depends(get_current_user)):
-    update_user = await UsersDAO.update_user_info(
-        id=user.id, 
-        about_me=user_data.about_me,
-        sex=user_data.sex,
-        hiding_yaoi=user_data.hiding_yaoi,
-        hiding_hentai=user_data.hiding_hentai
-        )
-    return update_user 
+async def user_change(user_data: dict, user: Users = Depends(get_current_user)):
+    if 'username' in user_data and user_data['username'] is not None:
+        check_username = await UsersProfileDAO.find_one_or_none(username=user_data['username'])
+        if check_username:
+            raise UserAlreadyExistsUsername
+
+    update_fields = {}
+
+    for key in [
+        'username', 'about_me', 'sex', 
+        'hiding_yaoi', 'hiding_hentai', 
+        'notification_vk', 'mailing_mail', 
+        'auth2', 'access_catalog', 'closed_profile'
+    ]:
+        if key in user_data and user_data[key] is not None:
+            update_fields[key] = user_data[key]
+
+    update_user = await UsersDAO.update_user_info(id=user.id, **update_fields)
+
+    return update_user
     
     
 

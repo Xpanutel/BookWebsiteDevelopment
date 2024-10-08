@@ -42,8 +42,6 @@ def decode_reset_password_token(token: str):
         raise TokenExpiredException
     except JWTError:
         raise IncorrectTokenFormatException
-    except JWTError:
-        return None
 
 
 async def authenticate_user(email: EmailStr, password: str):
