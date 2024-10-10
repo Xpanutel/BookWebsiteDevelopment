@@ -8,6 +8,7 @@ from app.exceptions.users.exceptions import (
     TokenAbsentException,
     TokenExpiredException,
     UserCheckAdminRole,
+    UserIsDeactivateTrue,
     UserIsNotPresentException,
 )
 from app.users.dao import UsersDAO
@@ -36,6 +37,8 @@ async def get_current_user(token: str = Depends(get_token)):
     user = await UsersDAO.find_one_or_none_user(id=UUID(user_id))
     if not user:
         raise UserIsNotPresentException
+    if user.is_deactivate is True:
+        raise UserIsDeactivateTrue
 
     return user
 

@@ -14,6 +14,8 @@ class UsersDAO(BaseDAO):
     Users.email, 
     Users.register_date, 
     Users.role,
+    Users.is_banned,
+    Users.is_deactivate,
     UsersProfiles.username,
     UsersProfiles.sex,
     UsersProfiles.about_me,
@@ -33,7 +35,7 @@ class UsersDAO(BaseDAO):
             query = select(
                 *cls.user_profile_columns
             ).select_from(Users).join(
-                UsersProfiles, UsersProfiles.user == Users.id, isouter=True
+                UsersProfiles, UsersProfiles.user_id == Users.id, isouter=True
             ).where(Users.id == id)
 
             finish = await session.execute(query)
@@ -54,7 +56,7 @@ class UsersDAO(BaseDAO):
             new_user = result.scalars().first()
 
             query_add_user_profile = insert(UsersProfiles).values(
-                user=new_user.id,
+                user_id=new_user.id,
                 img=img,
                 username=username
             ).returning(UsersProfiles)
@@ -64,7 +66,7 @@ class UsersDAO(BaseDAO):
             finish_query = select(
                 *cls.user_profile_columns
             ).select_from(Users).join(
-                UsersProfiles, UsersProfiles.user == Users.id, isouter=True
+                UsersProfiles, UsersProfiles.user_id == Users.id, isouter=True
             ).where(Users.id == new_user.id)
             finish = await session.execute(finish_query)
             finish_result = finish.mappings().one_or_none()
@@ -72,6 +74,19 @@ class UsersDAO(BaseDAO):
             await session.commit() 
 
             return finish_result
+        
+    @classmethod
+    async def deactivate_user(cls, id: UUID, is_deactivate: bool):
+        async with async_session_maker() as session:
+            query = (
+                update(Users)
+                .where(Users.id == id)
+                .values(is_deactivate=is_deactivate)
+            )
+            
+            result = await session.execute(query)
+            await session.commit()
+            return result
             
             
     
@@ -90,27 +105,24 @@ class UsersDAO(BaseDAO):
             return result
         
     @classmethod
-    async def update_user_info(
-        cls, 
-        id: UUID, 
-        **kwargs
-        ):
+    async def update_user_profile_info(cls, id: UUID, **kwargs):
         async with async_session_maker() as session:
             query = (
                 update(UsersProfiles)
-                .where(UsersProfiles.user == id)  
+                .where(UsersProfiles.user_id == id)
                 .values(**kwargs)
                 .returning(UsersProfiles)
             )
-            
+
             result = await session.execute(query)
             await session.commit()
-            
+
             result_query = select(
                 *cls.user_profile_columns
             ).select_from(Users).join(
-                UsersProfiles, UsersProfiles.user == Users.id, isouter=True
+                UsersProfiles, UsersProfiles.user_id == Users.id, isouter=True
             ).where(Users.id == id)
+
             result = await session.execute(result_query)
             return result.mappings().one_or_none()
         
@@ -119,14 +131,14 @@ class UsersDAO(BaseDAO):
         async with async_session_maker() as session:
             query = (
                 update(UsersProfiles)
-                .where(UsersProfiles.user == id)
+                .where(UsersProfiles.user_id == id)
                 .values(img=img)
             )
             
             finish_result = select(
                 *cls.user_profile_columns
             ).select_from(Users).join(
-                UsersProfiles, UsersProfiles.user == Users.id, isouter=True
+                UsersProfiles, UsersProfiles.user_id == Users.id, isouter=True
             ).where(Users.id == id)
             
             await session.execute(query)
@@ -138,6 +150,7 @@ class UsersDAO(BaseDAO):
         
 class UsersProfileDAO(BaseDAO):
     model = UsersProfiles
+    
     
     
     

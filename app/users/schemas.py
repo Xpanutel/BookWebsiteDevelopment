@@ -47,7 +47,8 @@ class SUser(BaseModel):
     auth2: bool
     access_catalog: bool
     closed_profile: bool
-    
+    is_banned: bool
+    is_deactivate: bool
     
     
 class SUserAccessToken(BaseModel):
@@ -85,11 +86,11 @@ class SUserUpdateInfo(BaseModel):
     about_me: Optional[str] = None
     hiding_yaoi: int = 0
     hiding_hentai: int = 0
-    notification_vk: bool = False
-    mailing_mail: bool = False
-    auth2: bool = False
-    access_catalog: bool = False
-    closed_profile: bool = False
+    notification_vk: bool
+    mailing_mail: bool
+    auth2: bool
+    access_catalog: bool
+    closed_profile: bool
     
     @field_validator("sex")
     def check_sex(v: int):

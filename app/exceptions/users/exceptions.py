@@ -39,6 +39,7 @@ class IncorrectTokenFormatException(BaseException):
         
 class UserIsNotPresentException(BaseException):
     status_code=status.HTTP_401_UNAUTHORIZED
+    detail="Не авторизован"
 
 class CannotAddDataToDatabase(BaseException):
     status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -112,3 +113,7 @@ class UserHidingHentaiError(BaseException):
 class UserAboutMeError(BaseException):
     status_code=status.HTTP_400_BAD_REQUEST
     detail="Слишком большой рассказ о себе"
+    
+class UserIsDeactivateTrue(BaseException):
+    status_code=status.HTTP_400_BAD_REQUEST
+    detail="Аккаунт был удалён"

@@ -275,9 +275,10 @@ async def change_password(user_data: SChangePassword, user: Users = Depends(get_
 
 @router.delete("/delete", status_code=200)
 async def user_delete(response: Response, user: Users = Depends(get_current_user)) -> SException:
-    await UsersDAO.delete(id=user.id)
+    await UsersDAO.deactivate_user(id=user.id, is_deactivate=True)
     response.delete_cookie("access_token")
-    return {"detail": "Аккаунт полностью удалён"}
+    return {"detail": "Аккаунт удалён"}
+
 
 @router.patch("/change")
 async def user_change(user_data: dict, user: Users = Depends(get_current_user)):
@@ -286,18 +287,16 @@ async def user_change(user_data: dict, user: Users = Depends(get_current_user)):
         if check_username:
             raise UserAlreadyExistsUsername
 
-    update_fields = {}
-
-    for key in [
+    allowed_fields = {
         'username', 'about_me', 'sex', 
         'hiding_yaoi', 'hiding_hentai', 
         'notification_vk', 'mailing_mail', 
         'auth2', 'access_catalog', 'closed_profile'
-    ]:
-        if key in user_data and user_data[key] is not None:
-            update_fields[key] = user_data[key]
+    }
 
-    update_user = await UsersDAO.update_user_info(id=user.id, **update_fields)
+    update_fields = {key: user_data[key] for key in allowed_fields if key in user_data and user_data[key] is not None}
+
+    update_user = await UsersDAO.update_user_profile_info(id=user.id, **update_fields)
 
     return update_user
     

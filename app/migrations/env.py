@@ -7,7 +7,8 @@ from sqlalchemy import pool
 from app.database import Base
 from alembic import context
 
-from app.users.models import Users #noqa
+from app.users.models import Users, UsersProfiles, Creators #noqa
+from app.books.models import Books, RatingsBooks, StatusBooks, TranslateStatusBooks, TypeBooks, CategoryBooks, GenreBooks, book_creator #noqa
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

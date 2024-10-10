@@ -4,6 +4,7 @@ from app.config import settings
 from app.users.router import router as user_router
 from app.users.router import router_auth as auth_user_router
 from app.images.router import router as images_router
+from app.books.router import router as books_router
 from redis import asyncio as aioredis
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
@@ -26,6 +27,7 @@ app = FastAPI(
 
 app.include_router(user_router)
 app.include_router(auth_user_router)
+app.include_router(books_router)
 app.include_router(images_router)
 
 origins = [
